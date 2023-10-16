@@ -1,0 +1,52 @@
+diff --git a/src/vs/base/common/async.ts b/src/vs/base/common/async.ts
+index 192c222315b..270279aa808 100644
+--- a/src/vs/base/common/async.ts
++++ b/src/vs/base/common/async.ts
+@@ -125,7 +125,7 @@ export function raceTimeout<T>(promise: Promise<T>, timeout: number, onTimeout?:
+ 	]);
+ }
+ 
+-export function asPromise<T>(callback: () => T | Thenable<T>): Promise<T> {
++export function asPromise<T>(callback: () => T | PromiseLike<T>): Promise<T> {
+ 	return new Promise<T>((resolve, reject) => {
+ 		const item = callback();
+ 		if (isThenable<T>(item)) {
+diff --git a/src/vs/base/common/dataTransfer.ts b/src/vs/base/common/dataTransfer.ts
+index bed42389897..b7d46e59adc 100644
+--- a/src/vs/base/common/dataTransfer.ts
++++ b/src/vs/base/common/dataTransfer.ts
+@@ -16,7 +16,7 @@ export interface IDataTransferFile {
+ }
+ 
+ export interface IDataTransferItem {
+-	asString(): Thenable<string>;
++	asString(): PromiseLike<string>;
+ 	asFile(): IDataTransferFile | undefined;
+ 	value: any;
+ }
+diff --git a/src/vs/editor/common/languages.ts b/src/vs/editor/common/languages.ts
+index 7c9a7a5a308..030dba2e042 100644
+--- a/src/vs/editor/common/languages.ts
++++ b/src/vs/editor/common/languages.ts
+@@ -148,7 +148,7 @@ export interface IState {
+  * to that type `T`. In addition, `null` and `undefined` can be returned - either directly or from a
+  * thenable.
+  */
+-export type ProviderResult<T> = T | undefined | null | Thenable<T | undefined | null>;
++export type ProviderResult<T> = T | undefined | null | PromiseLike<T | undefined | null>;
+ 
+ /**
+  * A hover represents additional information for a symbol or word. Hovers are
+diff --git a/src/vs/nls.ts b/src/vs/nls.ts
+index af0a0b96071..e5a5ad020aa 100644
+--- a/src/vs/nls.ts
++++ b/src/vs/nls.ts
+@@ -243,7 +243,7 @@ export function create(key: string, data: IBundledStrings & IConsumerAPI): ICons
+  * Invoked by the loader at run-time
+  * @skipMangle
+  */
+-export function load(name: string, req: AMDLoader.IRelativeRequire, load: AMDLoader.IPluginLoadCallback, config: AMDLoader.IConfigurationOptions): void {
++export function load(name: string, req: any, load: any, config: any): void {
+ 	const pluginConfig: INLSPluginConfig = config['vs/nls'] ?? {};
+ 	if (!name || name.length === 0) {
+ 		// TODO: We need to give back the mangled names here

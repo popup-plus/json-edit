@@ -1,0 +1,12 @@
+{
+	"extends": "./vscode/src/tsconfig.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"types": ["node"],
+		"checkJs": true
+		// "moduleResolution": "NodeNext",
+		// "allowImportingTsExtensions": true,
+		//"esModuleInterop": true
+	},
+	"include": ["src/**/*", "*"]
+}

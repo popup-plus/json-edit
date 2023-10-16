@@ -1,0 +1,20 @@
+name: Build, lint and publish to NPM
+
+on: "push"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run vscode-patch
+      - run: npm run build
+      - run: npm run test
+      - run: npm run lint

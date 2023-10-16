@@ -1,0 +1,31 @@
+{
+	"name": "@popup-io/json-edit",
+	"version": "1.0.0",
+	"description": "Utility functions to edit a JSON file, keeping existing formatting.",
+	"license": "MIT",
+	"sideEffects": false,
+	"type": "module",
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup",
+		"format": "eslint-and-prettier --fix",
+		"lint": "eslint-and-prettier",
+		"test": "NODE_OPTIONS='--loader tsx' node --test src/index.test.ts",
+		"vscode-patch": "cd vscode && git reset HEAD --hard && git apply ../vscode.patch",
+		"vscode-patch-export": "cd vscode && git diff > ../vscode.patch"
+	},
+	"devDependencies": {
+		"@popup-io/eslint-and-prettier": "0.0.2",
+		"@popup-io/styleguide-config": "0.0.2",
+		"@types/node": "^20.8.6",
+		"tsup": "^7.2.0",
+		"tsx": "^3.13.0",
+		"typescript": "^5.2.2"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
