@@ -1,4 +1,3 @@
-import { applyEdits, setProperty } from "vs/base/common/jsonEdit";
 import { FormattingOptions, getEOL } from "vs/base/common/jsonFormatter";
 import { DefaultEndOfLine } from "vs/editor/common/model";
 import { guessIndentation } from "vs/editor/common/model/indentationGuesser";
@@ -31,9 +30,8 @@ export function getFormattingOptions(originalJson: string): FormattingOptions {
 }
 
 export {
+	applyEdit,
 	applyEdits,
-	createTextBufferFactory,
-	getEOL,
-	guessIndentation,
+	removeProperty,
 	setProperty,
-};
+} from "vs/base/common/jsonEdit";
